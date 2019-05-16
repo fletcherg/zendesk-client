@@ -25,13 +25,13 @@ Get-ZendeskOrganization
 
 See below for a list of available commands.
 
-## Admin
+### Admin
 
 [Connect-Zendesk](Docs/Connect-Zendesk.md)
 
 [Disconnect-Zendesk](Docs/Disconnect-Zendesk.md)
 
-## Organizations
+### Organizations
 
 [Get-ZendeskOrganization](Docs/Get-ZendeskOrganization.md)
 
@@ -41,7 +41,7 @@ See below for a list of available commands.
 
 [Update-ZendeskOrganization](Docs/Update-ZendeskOrganization.md)
 
-## Users
+### Users
 
 [Get-ZendeskUser](Docs/Get-ZendeskUser.md)
 
@@ -55,5 +55,6 @@ See below for a list of available commands.
 
 # To Do
 
+* Write some tests.
 * Add more functions.
 * Eat snacks :dango: :custard: :shaved_ice:
