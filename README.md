@@ -6,9 +6,15 @@ Sorry this is pretty lame :sweat:. PRs/contribs welcome etc.
 
 # Getting Started
 
-You'll need a user account and a token.
+```
+# Download the repo
+# Extract to module path
 
-Following example:
+Install-Module zendesk-client
+
+```
+
+Then you'll need a user account and a token (Admin -> Channels -> API in Zendesk). Then can login like this example:
 
 ```
 $domain = "sandbox"
