@@ -25,9 +25,11 @@ Get-ZendeskOrganization
 
 See below for a list of available commands.
 
-[Connect-Zendesk]
-[Get-ZendeskOrganization]
-[Disconnect-Zendesk]
+[Connect-Zendesk](Docs/Connect-Zendesk.md)
+
+[Get-ZendeskOrganization](Docs/Get-ZendeskOrganization.md)
+
+[Disconnect-Zendesk](Docs/Disconnect-Zendesk.md)
 
 # To Do
 
