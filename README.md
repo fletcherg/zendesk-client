@@ -29,6 +29,12 @@ See below for a list of available commands.
 
 [Get-ZendeskOrganization](Docs/Get-ZendeskOrganization.md)
 
+[New-ZendeskOrganization](Docs/New-ZendeskOrganization.md)
+
+[Remove-ZendeskOrganization](Docs/Remove-ZendeskOrganization.md)
+
+[Update-ZendeskOrganization](Docs/Update-ZendeskOrganization.md)
+
 [Disconnect-Zendesk](Docs/Disconnect-Zendesk.md)
 
 # To Do
