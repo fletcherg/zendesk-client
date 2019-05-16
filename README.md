@@ -2,7 +2,7 @@
 
 Basic zendesk powershell module. :dragon_face:
 
-Sorry this is pretty lame :sweat:. PRs welcome..
+Sorry this is pretty lame. I only implemented a couple of functions that I needed at the time... :sweat:. PRs welcome etc.
 
 # Getting Started
 
@@ -39,10 +39,9 @@ See below for a list of available commands.
 
 [Search-ZendeskUser](Docs/Search-ZendeskUser.md)
 
-
 [Disconnect-Zendesk](Docs/Disconnect-Zendesk.md)
 
 # To Do
 
-* Add more functions
+* Add more functions.
 * Eat snacks :dango: :custard: :shaved_ice:
