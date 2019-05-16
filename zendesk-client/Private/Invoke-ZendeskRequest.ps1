@@ -13,45 +13,37 @@ Splat of webrequest parameters, sent from request handler.
 	)
 
 
-	do {
-        try
-        {
-			$result = Invoke-WebRequest -UseBasicParsing @parameters
-            $done = $true;
+	$pausefor = 0
+    do {
+        if ($pausefor -gt 0) {
+            Write-Verbose -Object "Throttled; backing down for $($pausefor) seconds..."
+            Start-Sleep -Seconds $pausefor
+            $headers.Calm = $true
         }
-        catch [Microsoft.PowerShell.Commands.HttpResponseException]
-        {
-            if($_.Exception.Response.StatusCode -eq 429)
-            {
-                [int] $delay = [int](($_.Exception.Response.Headers | Where-Object Key -eq 'Retry-After').Value[0])
-                Write-Verbose -Message "Retry Caught, delaying $delay ms"
-                Start-Sleep -Milliseconds $delay
-            }
-            else
-            {
-                Throw $_
-            }
-        }
-        catch [System.Net.WebException]
-        {
-            if ($_.Exception.Response)
-            {
-                $exceptionStream = $_.Exception.Response.GetResponseStream()
-                $streamReader = New-Object -TypeName System.IO.StreamReader -ArgumentList $exceptionStream
-                $exceptionResponse = $streamReader.ReadToEnd()
-                if ($exceptionResponse)
-                {
-                    Write-Verbose -Message $exceptionResponse
-                }
-            }
-            Throw $_
-        }
-        catch
-        {
-            Throw $_
-        }
-    } while ($done -ne $true)
 
-	return $result | ConvertFrom-JSON
+		try
+		{
+			$result = Invoke-WebRequest -UseBasicParsing @parameters
+		}
+			catch [System.Net.WebException] {
+			Write-Error $_.ErrorDetails.Message
+			$fail = $true
+
+		}
+
+        if (!$fail) {
+        	$ratelimit = $result.Headers['X-Rate-Limit-Remaining']
+
+        	if ([int]$ratelimit -lt 50) {
+	            Write-Host -Object "Calm may be needed: rate limit remaining - $($ratelimit)"
+        	}
+
+			$pausefor = $result.Headers["Retry-After"]
+		}
+    } while ($result.StatusCode -eq 429)
+
+	if ($parameters.method -ne "DELETE") {
+		return ConvertFrom-Json $result.Content
+	}
 
 }

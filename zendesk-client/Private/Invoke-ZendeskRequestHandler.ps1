@@ -11,7 +11,8 @@ Splat of webrequest parameters, sent from request handler.
 	param(
 		[Parameter(Mandatory=$true)]
 		[string]$endpoint,
-		[string]$method = "GET"
+		[string]$method = "GET",
+		$requestBody
 	)
 
 	if (!$global:ZendeskConnection) {
@@ -50,6 +51,63 @@ Splat of webrequest parameters, sent from request handler.
 				} while ($uri)
 
 				return $output
+
+		}
+
+		"POST" {
+
+			if (!$requestBody) {
+				$ErrorMessage = @()
+				$ErrorMessage += "Nothing posted nothing gained"
+				$ErrorMessage +=  $_.ScriptStackTrace
+				$ErrorMessage += ''    
+				$ErrorMessage += '--> $requestBody not specified'
+				$ErrorMessage += "----> :("
+				Write-Error ($ErrorMessage | Out-String)
+				return
+			}
+
+			$parameters = @{
+				Uri			= $Uri
+				Method      = "POST"
+				Headers     = @{ Authorization = $global:ZendeskConnection.authHeader }	
+				ContentType = "application/json"
+				Body = $requestBody
+			}
+
+			$result =  Invoke-ZendeskRequest $parameters
+
+			return $result | Expand-ObjectProperty
+
+		}
+
+		"DELETE" {
+
+			$parameters = @{
+				Uri			= $Uri
+				Method      = "DELETE"
+				Headers     = @{ Authorization = $global:ZendeskConnection.authHeader }	
+			}
+
+			$result =  Invoke-ZendeskRequest $parameters
+
+			return $result | Expand-ObjectProperty
+
+		}
+
+		"PUT" {
+
+			$parameters = @{
+				Uri			= $Uri
+				Method      = "PUT"
+				Headers     = @{ Authorization = $global:ZendeskConnection.authHeader }	
+				ContentType = "application/json"
+				Body = $requestBody
+			}
+
+			$result =  Invoke-ZendeskRequest $parameters
+
+			return $result | Expand-ObjectProperty
 
 		}
 		
