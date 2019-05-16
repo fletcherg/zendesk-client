@@ -15,5 +15,8 @@ function Connect-Zendesk {
         token = $token
 		authHeader = "Basic " + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("$($username)/token:$($token)"))
     }
+
+    ## We should make a web request and test
+    
     Write-Verbose 'Connection successful.'
 }
