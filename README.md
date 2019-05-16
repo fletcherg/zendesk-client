@@ -6,9 +6,9 @@ Sorry this is pretty lame :sweat:. PRs/contribs welcome etc.
 
 # Getting Started
 
-```
+```powershell
 # Download the repo
-# Extract to module path
+# Extract 'zendesk-client' to module path
 
 Install-Module zendesk-client
 
@@ -16,7 +16,7 @@ Install-Module zendesk-client
 
 Then you'll need a user account and a token (Admin -> Channels -> API in Zendesk). Then can login like this example:
 
-```
+```powershell
 $domain = "sandbox"
 $username = "someadminuser@bla.com"
 $token = "fIasrRkkdwPOQoajsdijwepASIdOZis0di9qASodi9wqrASd"
