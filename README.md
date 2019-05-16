@@ -2,7 +2,7 @@
 
 Basic zendesk powershell module. :dragon_face:
 
-Sorry this is pretty lame. I only implemented a couple of functions that I needed at the time... :sweat:. PRs welcome etc.
+Sorry this is pretty lame. Only implemented a couple of functions that were needed at the time... :sweat:. PRs/contribs welcome etc.
 
 # Getting Started
 
