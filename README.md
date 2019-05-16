@@ -25,21 +25,33 @@ Get-ZendeskOrganization
 
 See below for a list of available commands.
 
+## Admin
+
 [Connect-Zendesk](Docs/Connect-Zendesk.md)
+
+[Disconnect-Zendesk](Docs/Disconnect-Zendesk.md)
+
+## Organizations
 
 [Get-ZendeskOrganization](Docs/Get-ZendeskOrganization.md)
 
 [New-ZendeskOrganization](Docs/New-ZendeskOrganization.md)
 
-[New-ZendeskUser](Docs/New-ZendeskUser.md)
-
 [Remove-ZendeskOrganization](Docs/Remove-ZendeskOrganization.md)
 
 [Update-ZendeskOrganization](Docs/Update-ZendeskOrganization.md)
 
+## Users
+
+[Get-ZendeskUser](Docs/Get-ZendeskUser.md)
+
+[New-ZendeskUser](Docs/New-ZendeskUser.md)
+
+[Remove-ZendeskUser](Docs/Remove-ZendeskUser.md)
+
 [Search-ZendeskUser](Docs/Search-ZendeskUser.md)
 
-[Disconnect-Zendesk](Docs/Disconnect-Zendesk.md)
+[Update-ZendeskUser](Docs/Update-ZendeskUser.md)
 
 # To Do
 
