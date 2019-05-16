@@ -8,7 +8,7 @@ schema: 2.0.0
 # Connect-Zendesk
 
 ## SYNOPSIS
-Get Zendesk organizations
+Connect to Zendesk API
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Connect-Zendesk [-subdomain] <String> [-username] <String> [-token] <String> [<C
 ```
 
 ## DESCRIPTION
-This function will return either all Zendesk organizations, or just the organization as specified.
+This function will Connect to the Zendesk API with the specified details.
 
 ## EXAMPLES
 
