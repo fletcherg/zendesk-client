@@ -36,30 +36,18 @@ function Get-ZendeskOrganization {
 		[string]$startswith
 	)
 
-	if ($id) {
-		
+	if ($id) {		
 		$endpoint = "organizations/$($id).json"
-		Write-Verbose "Calling ZendeskRequest for endpoint $($endpoint)"
-		$output = Invoke-ZendeskRequest -endpoint $endpoint
-		
-		return $output.organization
-		
 	} elseif ($startswith) {
-		
 		$endpoint = "organizations/autocomplete.json?name=$($startsWith)"
-		Write-Verbose "Calling ZendeskRequest for endpoint $($endpoint)"
-		$output = Invoke-ZendeskRequest -endpoint $endpoint
-		
-		return $output.organizations
-		
 	} else {
-		
 		$endpoint = "organizations.json"
-		Write-Verbose "Calling ZendeskRequest for endpoint $($endpoint)"
-		$output = Invoke-ZendeskRequest -endpoint $endpoint
-		
-		return $output.organizations
-		
 	}
+	
+	Write-Verbose "Calling ZendeskRequestHandler for endpoint $($endpoint)"
+	$output = Invoke-ZendeskRequestHandler -endpoint $endpoint
+	
+	return $output
+		
 }
 

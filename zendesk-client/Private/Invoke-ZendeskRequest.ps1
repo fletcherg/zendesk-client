@@ -1,42 +1,57 @@
 function Invoke-ZendeskRequest {
+<#
+.SYNOPSIS
+ Invokes actual request to Zendesk API
+
+.PARAMETER parameters
+Splat of webrequest parameters, sent from request handler.
+
+#>
 	[CmdletBinding()]
 	param(
-		[Parameter(Mandatory=$true)]
-		[string]$endpoint,
-		[string]$method = "GET"
+		$parameters
 	)
 
-	if (!$global:ZendeskConnection) {
-		$ErrorMessage = @()
-		$ErrorMessage += "Not connected to a Manage server."
-		$ErrorMessage +=  $_.ScriptStackTrace
-		$ErrorMessage += ''    
-		$ErrorMessage += '--> $ZendeskConnection variable not found.'
-		$ErrorMessage += "----> Run 'Connect-Zendesk' to initialize the connection before issuing other Zendesk functions."
-		Write-Error ($ErrorMessage | Out-String)
-		return
-	}
 
-	$headers = @{Authorization = $global:ZendeskConnection.authHeader } 
-	$uri = "https://$($global:ZendeskConnection.subdomain).zendesk.com/api/v2/" + $endpoint
+	do {
+        try
+        {
+			$result = Invoke-WebRequest -UseBasicParsing @parameters
+            $done = $true;
+        }
+        catch [Microsoft.PowerShell.Commands.HttpResponseException]
+        {
+            if($_.Exception.Response.StatusCode -eq 429)
+            {
+                [int] $delay = [int](($_.Exception.Response.Headers | Where-Object Key -eq 'Retry-After').Value[0])
+                Write-Verbose -Message "Retry Caught, delaying $delay ms"
+                Start-Sleep -Milliseconds $delay
+            }
+            else
+            {
+                Throw $_
+            }
+        }
+        catch [System.Net.WebException]
+        {
+            if ($_.Exception.Response)
+            {
+                $exceptionStream = $_.Exception.Response.GetResponseStream()
+                $streamReader = New-Object -TypeName System.IO.StreamReader -ArgumentList $exceptionStream
+                $exceptionResponse = $streamReader.ReadToEnd()
+                if ($exceptionResponse)
+                {
+                    Write-Verbose -Message $exceptionResponse
+                }
+            }
+            Throw $_
+        }
+        catch
+        {
+            Throw $_
+        }
+    } while ($done -ne $true)
 
-	switch ( $method )
-	{
-		"GET" {
-				$output = @()
-				do {
-					Write-Verbose "Requesting from $($uri)..."
-					$result =  (Invoke-RestMethod -Method GET -Uri $uri -Headers $headers)
-					if ($result.next_page) {
-						$uri = $result.next_page
-					} else {
-						$uri = $null
-					}
-					$output += $result
-				} while ($uri)
-				return $output
-		}
-		
-	}
+	return $result | ConvertFrom-JSON
 
 }
