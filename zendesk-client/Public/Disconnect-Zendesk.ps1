@@ -1,4 +1,21 @@
 function Disconnect-Zendesk {
+	<#
+        .SYNOPSIS
+        Disconnect from Zendesk
+
+		.DESCRIPTION
+        This function will remove Zendesk connection variables.
+		
+        .EXAMPLE
+		Disconnect-Zendesk
+        Disconnect from Zendesk API.
+
+        .NOTES
+        Date: 16/05/2019
+
+        .LINK
+        https://github.com/fletcherg/zendesk-client
+    #>
     [CmdletBinding()]
     param()
     $null = Remove-Variable -Name ZendeskConnection -Scope global -Force -Confirm:$false -ErrorAction SilentlyContinue
