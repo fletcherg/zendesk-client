@@ -31,9 +31,14 @@ See below for a list of available commands.
 
 [New-ZendeskOrganization](Docs/New-ZendeskOrganization.md)
 
+[New-ZendeskUser](Docs/New-ZendeskUser.md)
+
 [Remove-ZendeskOrganization](Docs/Remove-ZendeskOrganization.md)
 
 [Update-ZendeskOrganization](Docs/Update-ZendeskOrganization.md)
+
+[Search-ZendeskUser](Docs/Search-ZendeskUser.md)
+
 
 [Disconnect-Zendesk](Docs/Disconnect-Zendesk.md)
 

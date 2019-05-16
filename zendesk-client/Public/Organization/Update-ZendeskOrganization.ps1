@@ -32,7 +32,7 @@ function Update-ZendeskOrganization {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory=$true)]
-		[long[]]$id
+		[long[]]$id,
 		[Parameter(Mandatory=$true)]
 		$orgDetails
 	)
